@@ -26,6 +26,9 @@ jobs:
       - name: Install app dependencies
         run: npm install
 
+      - name: Init Ionic App
+        run: ionic init
+
       - name: Build Ionic App
         run: ionic build
 
