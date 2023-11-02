@@ -57,7 +57,11 @@ jobs:
       #   run: cd android && ./gradlew assembleDebug
 
       - name: Generate the Android App Bundle
-        run: cd android && ./gradlew bundle && cd ..
+        working-directory: ./android/
+        run: ./gradlew bundle
+
+      - name: List folders
+        run: ls -la
 
       - name: Upload dev APK
         uses: actions/upload-artifact@v1
