@@ -20,26 +20,26 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: Install Ionic
-        run: npm install -g @ionic/cli
+      - name: Install capacitor
+        run: npm install -g @capacitor/cli @capacitor/core
 
-      - name: Install app dependencies
-        run: npm install
+      - name: Setup capacitor config file
+        run: npx cap init --appName 'angular-mobile-app' --appId 'com.example.app'
 
-      - name: Init Ionic App
-        run: ionic init
+      - name: Add native iOS and Android packages
+        run: npm install -g @capacitor/android @capacitor/ios
 
-      - name: Build Ionic App
-        run: ionic build
+      - name: Add Android
+        run: npx cap add android
 
-      - name: Copy Android
-        run: ionic capacitor copy android
+      - name: Add iOS
+        run: npx cap add ios
 
-      - name: Build Android Dev APK
-        run: ionic capacitor build android
+      - name: Build app and copy build folder to the ios/android projects
+        run: rm -rf node_modules && pnpm install && pnpm run build && npx cap sync
 
-      - name: Build Android Release APK
-        run: ionic capacitor build android --release --prod
+      # - name: Build Android Debug APK
+      #   run: cd android && ./gradlew assembleDebug
 
       - name: Generate the Android App Bundle
         working-directory: ./android/
