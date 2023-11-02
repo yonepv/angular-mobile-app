@@ -53,30 +53,40 @@ jobs:
       - name: Build app and copy build folder to the ios/android projects
         run: rm -rf node_modules && pnpm install && pnpm run build && npx cap sync
 
-      # - name: Build Android Debug APK
-      #   run: cd android && ./gradlew assembleDebug
-
-      - name: Generate the Android App Bundle
-        working-directory: ./android/
-        run: ./gradlew bundle
+      - name: Build Android Debug APK
+        working-directory: ./android
+        run: ./gradlew assembleDebug
 
       - name: List folders
-        run: ls -la
+        run: cd android/app/build/outputs/apk/debug && ls -la && cd ../../../../
 
       - name: Upload dev APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-dev
-          path: android/app/build/outputs/bundle/debug/app-debug.abb
+          name: app-dev-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
 
-      - name: List folders
-        run: cd android/app/build/outputs/bundle/debug && ls -la
+      # - name: Generate the Android App Bundle
+      #   working-directory: ./android/
+      #   run: ./gradlew bundle
 
-      - name: Upload release bundle
-        uses: actions/upload-artifact@v1
-        with:
-          name: app-release
-          path: android/app/build/outputs/bundle/release/app.aab
+      # - name: List folders
+      #   run: ls -la
 
-      - name: List folders
-        run: cd android/app/build/outputs/bundle/release && ls -la
+      # - name: Upload dev APK
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: app-dev
+      #     path: android/app/build/outputs/bundle/debug/app-debug.abb
+
+      # - name: List folders
+      #   run: cd android/app/build/outputs/bundle/debug && ls -la
+
+      # - name: Upload release bundle
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: app-release
+      #     path: android/app/build/outputs/bundle/release/app.aab
+
+      # - name: List folders
+      #   run: cd android/app/build/outputs/bundle/release && ls -la
