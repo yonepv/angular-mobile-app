@@ -27,7 +27,7 @@ jobs:
         run: npm install
 
       - name: Setup capacitor config file
-        run: npx cap init --appName 'angular-mobile-app' --appId 'com.example.app' --webDir 'dist/angular-mobile-app'
+        run: npx cap init 'angular-mobile-app' 'com.example.app' --webDir 'dist/angular-mobile-app'
 
       - name: Add native iOS and Android packages
         run: npm install -g @capacitor/android @capacitor/ios
