@@ -23,6 +23,9 @@ jobs:
       - name: Install capacitor
         run: npm install -g @capacitor/cli @capacitor/core
 
+      - name: Install app dependencies
+        run: npm install
+
       - name: Setup capacitor config file
         run: npx cap init --appName 'angular-mobile-app' --appId 'com.example.app' --webDir 'dist/angular-mobile-app'
 
