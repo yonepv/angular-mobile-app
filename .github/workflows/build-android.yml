@@ -44,6 +44,9 @@ jobs:
       - name: Add iOS
         run: npx cap add ios
 
+      - name: List folders
+        run: ls -la
+
       - name: Build app and copy build folder to the ios/android projects
         run: rm -rf node_modules && pnpm install && pnpm run build && npx cap sync
 
